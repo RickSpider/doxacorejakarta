@@ -1,0 +1,112 @@
+<?page title="SistemaPropiedades" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="SistemaPropiedad" border="normal"
+		viewModel="@id('vm') @init('com.doxacore.configuracion.SistemaPropiedadVM')"
+		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<hlayout vflex="1">
+			
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1" >
+
+						<button label="Agregar"
+							iconSclass=" z-icon-plus" onClick="@command('modalSistemaPropiedadAgregar')" disabled="@load(!vm.opCrearSistemaPropiedad)" />
+
+					</hbox>
+
+					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+						vflex="1" model="@load(vm.lSistemaPropiedades)" checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="ID" align="right"
+								hflex="min" />
+							<listheader label="Clave" align="left"
+								 />
+							<listheader label="Valor" align="left" />
+							
+							<listheader align="center" 
+								hflex="min"/>
+
+
+						</listhead>
+
+
+						<auxhead>
+
+							<auxheader />
+							<auxheader />
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[0])" instant="true"
+									onChange="@command('filtrarSistemaPropiedad')" hflex="1" />
+							</auxheader>
+
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[1])" instant="true"
+									onChange="@command('filtrarSistemaPropiedad')" hflex="1" />
+							</auxheader>
+						
+							<auxheader />
+						</auxhead>
+
+						<template name="model">
+
+							<listitem>
+								<listcell />
+								<listcell label="@load(each.sistemapropiedadid)" />
+								
+								<listcell
+									label="@load(each.clave)" />
+									
+								<listcell
+									label="@load(each.valor)" />
+											
+										
+								<listcell>
+									<hlayout>
+																						
+										<button iconSclass="z-icon-edit"
+											onClick="@command('modalSistemaPropiedad', sistemapropiedadid=each.sistemapropiedadid)"
+											tooltiptext="Editar" disabled="@load(!vm.opEditarSistemaPropiedad)"/>
+											
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarSistemaPropiedadConfirmacion', sistemaPropiedad=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opBorrarSistemaPropiedad)"/>
+
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lSistemaPropiedades.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+
+					</listbox>
+
+				</vlayout>
+
+		
+			
+		</hlayout>
+
+	</window>
+</zk>

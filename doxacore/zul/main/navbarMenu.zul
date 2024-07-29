@@ -1,0 +1,18 @@
+<zk>
+
+	<navbar id="navbar" orient="vertical" collapsed="@load(tbvm.collapsed)"
+		onSelect="@command('navigatePage', target=self.selectedItem.attributes['navigationPage'])">
+		
+		<apply templateURI="@load(vm.getDirectorioSistema())" />
+
+	 	<nav label="Configuracion" iconSclass="z-icon-gear" 
+			children="@load(vm.pageMap[self.label].values()) @template('navitem')" 
+			visible="@load(vm.menuVisible( vm.pageMap[self.label].values().size() ))"/>
+
+		<template name="navitem" var="navigationPage">
+			<navitem label="@load(navigationPage.subTitle)"
+				selected="@load(navigationPage.selected)" />
+		</template>
+	</navbar>
+
+</zk>

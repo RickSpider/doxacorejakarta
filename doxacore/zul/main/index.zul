@@ -1,0 +1,114 @@
+<?page title="Main" contentType="text/html;charset=UTF-8"?>
+<!-- protect page by the authentication init  -->
+<?init class="com.doxacore.login.AuthenticationInit"?>
+
+<!-- de esta forma carga primero el css -->
+<?style src="/css/main/doxacore.css" ?>
+<?style src="/css/main/style.css" ?>
+<?style src="/css/main/widget.css" ?>
+<?style src="/css/bootstrap/bootstrap4.min.css" ?>
+<?style src="/css/fontawesome/font-awesome.min.css" ?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+
+
+	<vlayout vflex="1" hflex="1"
+	apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('tbvm')@init('com.doxacore.main.TopBarVM')">
+	
+	
+
+		<hlayout style="padding: 10px 15px;" hflex="1">
+
+
+			<hlayout hflex="1">
+
+				<hbox vflex="1" hflex="1" pack="start" align="center">
+
+					<button iconSclass="z-icon-reorder" class="doxa-button-round" onClick="@command('collapsedAll')"/>
+
+					<label value="PowerBy DoxaCORE" visible="@load(tbvm.visibleResponsive)"/>
+
+				</hbox>
+
+
+				<hbox vflex="1" hflex="1" pack="center" align="center"
+					apply="org.zkoss.bind.BindComposer"
+					viewModel="@id('vm')@init('com.doxacore.util.SystemInfo')">
+
+					<label value="@load(vm.sistemaNombre)" />
+				</hbox>
+
+				<vbox
+					apply="com.doxacore.login.controller.LogoutController" hflex="1"
+					pack="center" align="end">
+
+					<hbox>
+						<!-- <label
+							value="${sessionScope.userCredential.name}" />
+							<button id="logout" iconSclass="z-icon-sign-out"
+							tooltiptext="Salir." /> -->
+						<hbox align="center" pack="center">
+
+							<vbox>
+								<label
+									value="${sessionScope.userCredential.name}"
+									onClick='editPopup.open(self,"after_start")' visible="@load(tbvm.visibleResponsive)"/>
+								<label
+									value="${sessionScope.userCredential.extra}"
+									style="font-weight:bold;" />
+							</vbox>
+
+							<div class="doxa-image-round"
+								onClick='editPopup.open(self,"after_start")'>
+								<image
+									src="/doxacore/img/blank-profile.png" width="100%"
+									height="100%" />
+							</div>
+
+						</hbox>
+
+							
+						<menupopup id="editPopup">
+
+							<menuitem iconSclass="	z-icon-key " label="Cambiar Contraseña"
+								onClick="@command('cambiarPass', user=sessionScope.userCredential.account)" />
+
+							<menuitem id="logout"
+								iconSclass="z-icon-sign-out" label="Salir" />
+						</menupopup>
+
+						 
+					</hbox>
+
+				</vbox>
+
+
+			</hlayout>
+
+		
+
+		</hlayout>
+
+	
+
+
+		<div id="container" sclass="vertical"
+			apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm')@init('com.doxacore.main.MainVM')" vflex="1">
+
+			<apply templateURI="/doxacore/zul/main/navbarMenu.zul" />
+
+			<include id="contentInclude" sclass="@load(tbvm.includeSclass)" mode="defer"
+				currentPage="@ref(vm.currentPage)"
+				arg="@load(currentPage.data.toString())"
+				src="@load(currentPage.includeUri)" vflex="1" />
+
+
+
+		</div>
+
+	</vlayout>
+
+
+</zk>

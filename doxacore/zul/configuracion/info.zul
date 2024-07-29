@@ -1,0 +1,53 @@
+<?page title="Roles" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Info" border="normal"
+		
+		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<hlayout vflex="1" >
+			
+			<listbox hflex = "1" vflex="1">
+			
+				<listhead >
+				
+					<listheader label="Info" align="left"/>
+					<listheader label="Info1" align="left"/>
+					<listheader label="Info2" align="left"/>
+					<listheader label="Info3" align="left"/>
+				
+				</listhead>
+				
+				<listitem>
+				
+					<listcell>Desarrollador</listcell>
+					<listcell>Ricardo Gonzalez</listcell>
+					<listcell>ricardogonzalez@doxa.com.py - +595961748907</listcell>
+					<listcell>-</listcell>
+				
+				</listitem>
+				
+				<listitem>
+					
+					<listcell>Framework</listcell>
+					<listcell>Zkoss</listcell>
+					<listcell>https://www.zkoss.org</listcell>
+					<listcell><label value="${desktop.webApp.version}"/></listcell>
+				
+				</listitem>
+				
+				<listitem>
+					
+					<listcell>Core del Sistema</listcell>				
+					<listcell>DoxaCore</listcell>
+					<listcell>https://github.com/RickSpider/doxacore</listcell>
+					<listcell>-</listcell>
+				
+				</listitem>
+			
+			</listbox>
+			
+		</hlayout>
+
+	</window>
+
+</zk>

@@ -1,0 +1,53 @@
+<?page title="DoxaCORE"?>
+
+<?link href="/css/bootstrap/bootstrap4.min.css" rel="stylesheet" id="bootstrap-css" ?>
+<?script src="/css/bootstrap/bootstrap4.min.js" ?>
+
+
+<?link rel="stylesheet" href="/css/login/login.css" ?>
+
+<!-- comentario en index.zul -->
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+
+	<vlayout>
+		<div class="sidenav">
+			<div class="login-main-text">
+			
+				<image src="/logo.png" style=" width: 80%; height: auto;" />
+				<!-- <h:h2>
+					DoxaCore
+					<h:br />
+					Login Page
+				</h:h2>
+				<h:p>Inicio de sesion de Usuario.</h:p> -->
+			</div>
+		</div>
+
+		<div class="main">
+			<div class="col-md-6 col-sm-12">
+				<div class="login-form"
+					apply="com.doxacore.login.controller.LoginController">
+
+					<div class="form-group">
+						<label>Usuario</label>
+						<textbox id="account" type="text"
+							class="form-control" placeholder="Usuario" />
+					</div>
+					<div class="form-group">
+						<label>Contraseña</label>
+						<textbox id="password" type="password"
+							class="form-control" placeholder="Contraseña" />
+					</div>
+
+					<button id="login" label="Iniciar"
+						class="btn btn-black" />
+
+					<label id="message" sclass="warn" value="&#160;" />
+
+				</div>
+			</div>
+		</div>
+	</vlayout>
+
+</zk>

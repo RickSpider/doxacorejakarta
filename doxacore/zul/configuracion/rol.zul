@@ -1,0 +1,234 @@
+<?page title="Roles" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Rol" border="normal"
+		viewModel="@id('vm') @init('com.doxacore.configuracion.RolVM')"
+		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<hlayout vflex="1">
+			<groupbox hflex="1" vflex="1">
+				<caption label="Rol" />
+
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1" >
+
+						<button label="Agregar"
+							iconSclass=" z-icon-plus" onClick="@command('modalRolAgregar')" disabled="@load(!vm.opCrearRol)" />
+
+					</hbox>
+
+					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+						vflex="1" model="@load(vm.lRoles)" checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="ID" align="right" hflex="min" />
+							<listheader label="Rol" align="left" />
+							<listheader label="Descripción" align="left" />
+							<listheader align="center" hflex="min"/>
+
+
+						</listhead>
+
+
+						<auxhead>
+
+							<auxheader />
+							<auxheader />
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[0])" instant="true"
+									onChange="@command('filtrarRol')" hflex="1" />
+							</auxheader>
+
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[1])" instant="true"
+									onChange="@command('filtrarRol')" hflex="1" />
+							</auxheader>
+
+							<auxheader />
+						</auxhead>
+
+						<template name="model">
+
+							<listitem
+								onClick="@command('refrescarOperaciones', rol = each )">
+								<listcell />
+								<listcell label="@load(each.rolid)" />
+								<listcell label="@load(each.rol)" />
+								<listcell
+									label="@load(each.descripcion)" />
+
+								<listcell>
+									<hlayout>
+
+										<button iconSclass="z-icon-edit"
+											onClick="@command('modalRol', rolid=each.rolid)"
+											tooltiptext="Editar" disabled="@load(!vm.opEditarRol)"/>
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarRolConfirmacion', rol=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opBorrarRol)"/>
+
+
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lRoles.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+
+					</listbox>
+
+				</vlayout>
+
+			</groupbox>
+			
+			<groupbox vflex="1" hflex="1">
+				<caption label="Operaciones por Rol" />
+
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1">
+
+						<bandbox id="bd" value = "@load(vm.buscarOperacion)" mold="rounded" autodrop="true"
+							width="250px" onOpen="@command('generarListaBuscarOperacion')"
+							readonly="true">
+							<bandpopup>
+
+								<vbox>
+
+									<hbox>
+
+										<label value="Buscar:" />
+
+										<textbox instant="true"
+											value="@bind(vm.buscarOperacion)"
+											onChange="@command('filtrarOperacionBuscar')" />
+
+									</hbox>
+
+									<listbox height="250px"
+										width="450px" mold="paging" autopaging="true"
+										onSelect="bd.close()" 
+										model="@load(vm.lOperacionesBuscar)">
+
+										<listhead>
+											<listheader label="ID"
+												hflex="min" />
+											<listheader label="Operacion" />
+											<listheader
+												label="Descripción" />
+										</listhead>
+
+										<template name="model">
+
+											<listitem value="@load(each[1])" onClick="@command('onSelectOperacion', id = each[0])">
+
+												<listcell
+													label="@load(each[0])" />
+
+												<listcell 
+													label="@load(each[1])" />
+ 
+												<listcell
+													label="@load(each[2])" />
+
+											</listitem>
+
+										</template>
+										<listitem />
+									</listbox>
+
+								</vbox>
+							</bandpopup>
+						</bandbox>
+						
+						<button iconSclass=" z-icon-plus"
+							onClick="@command('agregarOperacion')"  disabled="@load(!vm.opAgregarRolOperacion)"/>
+						
+					</hbox>
+
+					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+						vflex="1" hflex="1" model="@load(vm.lOperacionesRoles)"
+						checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="ID" align="right" hflex="min" />
+							<listheader label="Operacion" align="left" />
+							<listheader label="Descripción" align="left" />
+							<listheader align="center" hflex="min" />
+
+						</listhead>
+
+						<template name="model">
+
+							<listitem>
+
+								<listcell />
+								<listcell
+									label="@load(each.operacion.operacionid)" />
+								<listcell
+									label="@load(each.operacion.operacion)" />
+								<listcell
+									label="@load(each.operacion.descripcion)" />
+
+								<listcell>
+									<hlayout>
+
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarOperacionConfirmacion', RolOperacion=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opQuitarRolOperacion)" />
+											
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lOperacionesRoles.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+					</listbox>
+
+				</vlayout>
+
+			</groupbox>
+
+		</hlayout>
+
+	</window>
+
+</zk>

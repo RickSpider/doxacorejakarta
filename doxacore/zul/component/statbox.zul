@@ -1,0 +1,26 @@
+<!-- has 2 parameters statBlock and detailCommand -->
+<h:div class="col-md-3 col-sm-6" xmlns:h="native">
+	<h:div class="widget widget-stats bg-${statBlock.style} mb-10px">
+		<h:div class="stats-icon stats-icon-lg ">
+			<h:i class="fa ${statBlock.icon} fa-fw" />
+		</h:div>
+		<h:div class="stats-info">
+			<h:div class="stats-title">${statBlock.title}</h:div>
+			<h:div class="stats-number">${statBlock.value}</h:div>
+		</h:div>
+
+		<div visible="${statBlock.showProgresbar}">
+			<h:div class="stats-progress progress" >
+				<h:div class="progress-bar" style="width: ${statBlock.porcentaje}%;"></h:div>
+			</h:div>
+			<h:div class="stats-desc">Datos porcentuales (${statBlock.porcentaje}%)</h:div>
+		</div>
+
+	<!--  <h:div class="stats-link">
+			<a onClick="@command(detailCommand,statId=statBlock.id)">
+				View Detail
+				<h:i class="fa fa-arrow-circle-o-right" />
+			</a>
+		</h:div>-->	
+	</h:div>
+</h:div>

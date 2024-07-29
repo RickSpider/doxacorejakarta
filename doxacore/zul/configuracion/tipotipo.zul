@@ -1,0 +1,197 @@
+<?page title="Tipotipos" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Tipotipos" border="normal"
+		viewModel="@id('vm') @init('com.doxacore.configuracion.TipotipoVM')"
+		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<hlayout vflex="1">
+			<groupbox hflex="1" vflex="1">
+				<caption label="Tipotipos" />
+
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1" >
+
+						<button label="Agregar"
+							iconSclass=" z-icon-plus" onClick="@command('modalTipotipoAgregar')" disabled="@load(!vm.opCrearTipotipo)"/>
+
+					</hbox>
+
+
+					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+						vflex="1" model="@load(vm.lTipotipos)" checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="ID" align="right" hflex="min" />
+							<listheader label="Tipotipo" align="left" />
+							<listheader label="Descripción" align="left" />
+							<listheader label="Sigla" align="left" />
+							<listheader align="center" hflex="min"/>
+
+
+						</listhead>
+
+
+						<auxhead>
+
+							<auxheader />
+							<auxheader />
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[0])" instant="true"
+									onChange="@command('filtrarModulo')" hflex="1" />
+							</auxheader>
+
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[1])" instant="true"
+									onChange="@command('filtrarModulo')" hflex="1" />
+							</auxheader>
+							
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[2])" instant="true"
+									onChange="@command('filtrarModulo')" hflex="1" />
+							</auxheader>
+
+							<auxheader />
+						</auxhead>
+
+						<template name="model">
+
+							<listitem onClick="@command('refrescarTipos', tipotipo = each )" >
+
+								<listcell />
+								<listcell label="@load(each.tipotipoid)" />
+								<listcell label="@load(each.tipotipo)" />
+								<listcell
+									label="@load(each.descripcion)" />
+									
+								<listcell
+									label="@load(each.sigla)" />
+
+								
+								<listcell>
+									<hlayout>
+
+										<button iconSclass="z-icon-edit"
+											onClick="@command('modalTipotipo', tipotipoid=each.tipotipoid)"
+											tooltiptext="Editar" disabled="@load(!vm.opEditarTipotipo)"/>
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarTipotipoConfirmacion', tipotipo=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opBorrarTipotipo)"/>
+
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lTipotipos.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+
+					</listbox>
+
+				</vlayout>
+
+			</groupbox>
+			
+			<groupbox vflex="1" hflex="1">
+				<caption label="Tipos por Tipotipo" />
+
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1">
+
+						<button label="Agregar" iconSclass=" z-icon-plus"
+							onClick="@command('modalTipoAgregar')" disabled="@load(!vm.opCrearTipo)" />  
+
+					</hbox>
+
+					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+						vflex="1" hflex="1" model="@load(vm.lTiposTipotipos)"
+						checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="Tipo" align="left" />
+							<listheader label="Descripcion" />
+							<listheader label="Sigla" />
+							<listheader align="center" hflex="min" />
+
+						</listhead>
+
+						<template name="model">
+
+							<listitem>
+
+								<listcell />
+								<listcell
+									label="@load(each.tipo)" />
+								<listcell
+									label="@load(each.descripcion)" />
+							
+								<listcell
+									label="@load(each.sigla)" />
+
+								<listcell>
+									<hlayout>
+
+										<button iconSclass="z-icon-edit"
+											onClick="@command('modalTipo', tipoid=each.tipoid)"
+											tooltiptext="Editar" disabled="@load(!vm.opEditarTipo)"/>
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarTipoConfirmacion', tipo=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opBorrarTipo)"/>
+											
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lTiposTipotipos.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+					</listbox>
+
+				</vlayout>
+
+			</groupbox>
+			
+		
+		</hlayout>
+
+	</window>
+
+</zk>

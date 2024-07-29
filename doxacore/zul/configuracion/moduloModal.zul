@@ -1,0 +1,83 @@
+<?page title="moduloModal" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Modulo Crear/Ver/Editar" border="normal"
+		position="center,center" closable="true" mode="modal"
+		action="show: slideDown;hide: slideUp">
+
+		<vlayout>
+
+			<hlayout>
+				<hbox width="130px">
+					<label value="Modulo: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.moduloSelected.modulo)" readonly="@load(vm.editar)"
+					width="150px" />					
+			</hlayout>
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Titulo: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.moduloSelected.titulo)"
+					width="150px" />
+			
+			</hlayout>			
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Descripción: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.moduloSelected.descripcion)"
+					width="150px" />
+			
+			</hlayout>
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Menu: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.moduloSelected.menu)"
+					width="150px" />
+			
+			</hlayout>			
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Path: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.moduloSelected.path)"
+					width="150px" />
+			
+			</hlayout>
+			
+			<hlayout>
+				<hbox width = "130px">
+					<label value="Habilitado: " style="font-weight:bold" />	
+				</hbox>
+				<checkbox checked="@bind(vm.moduloSelected.habilitado)" />
+			</hlayout>
+			
+			<hlayout>
+				<hbox width = "130px">
+					<label value="Pagina de Inicio " style="font-weight:bold" />	
+				</hbox>
+				<checkbox checked="@bind(vm.moduloSelected.pagInit)" />
+			</hlayout>
+			
+			<space height="10px" />
+
+			<hlayout>
+
+				<button label="Aceptar" onClick="@command('guardar')" />
+
+			</hlayout>
+
+		</vlayout>
+
+
+	</window>
+</zk>

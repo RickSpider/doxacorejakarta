@@ -1,0 +1,46 @@
+<?page title="operacionModal" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Operación Crear/Ver/Editar" border="normal"
+		position="center,center" closable="true" mode="modal"
+		action="show: slideDown;hide: slideUp">
+
+		<vlayout>
+
+			<hlayout>
+				<hbox width="130px">
+					<label value="Operacion: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.operacionSelected.operacion)" readonly="@load(vm.editar)"
+					width="150px" />					
+			</hlayout>
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Descripción: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.operacionSelected.descripcion)"
+					width="150px" />
+			
+			</hlayout>
+			
+			<hlayout>
+				<hbox width = "130px">
+					<label value="Abre Modulo " style="font-weight:bold" />	
+				</hbox>
+				<checkbox checked="@bind(vm.operacionSelected.abreModulo)" />
+			</hlayout>
+
+			<space height="10px" />
+
+			<hlayout>
+
+				<button label="Aceptar" onClick="@command('guardarOperacion')" />
+
+			</hlayout>
+
+		</vlayout>
+
+
+	</window>
+</zk>

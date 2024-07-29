@@ -1,0 +1,39 @@
+<?page title="sistamaPropiedadModal" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="SistamaPropiedad Crear/Ver/Editar" border="normal"
+		position="center,center" closable="true" mode="modal"
+		action="show: slideDown;hide: slideUp">
+
+		<vlayout>
+
+			<hlayout>
+				<hbox width="130px">
+					<label value="Clave:" style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.sistemaPropiedadSelected.clave)" readonly="@load(vm.editar)"
+					width="150px" />					
+			</hlayout>
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Valor:" style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.sistemaPropiedadSelected.valor)"
+					width="150px" />
+			
+			</hlayout>
+
+			<space height="10px" />
+
+			<hlayout>
+
+				<button label="Aceptar" onClick="@command('guardar')" />
+
+			</hlayout>
+
+		</vlayout>
+
+
+	</window>
+</zk>

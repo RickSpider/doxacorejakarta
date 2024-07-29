@@ -1,0 +1,219 @@
+<?page title="Modulos" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Modulo" border="normal"
+		viewModel="@id('vm') @init('com.doxacore.configuracion.ModuloVM')"
+		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<hlayout vflex="1">
+			<groupbox hflex="1" vflex="1">
+				<caption label="Modulo" />
+
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1" >
+
+						<button label="Agregar"
+							iconSclass=" z-icon-plus" onClick="@command('modalModuloAgregar')" disabled="@load(!vm.opCrearModulo)"/>
+
+					</hbox>
+
+
+					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+						vflex="1" model="@load(vm.lModulos)" checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="ID" align="right"
+								hflex="min" />
+							<listheader label="Modulo" align="left"/>
+							<listheader label="Descripción" align="left" />
+							<listheader label="Path" align="left" />
+							<listheader label="Habilitado" align="left" hflex="min" />
+							<listheader align="center" hflex="min"/>
+
+
+						</listhead>
+
+
+						<auxhead>
+
+							<auxheader />
+							<auxheader />
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[0])" instant="true"
+									onChange="@command('filtrarModulo')" hflex="1" />
+							</auxheader>
+
+							<auxheader>
+								<textbox
+									value="@bind(vm.filtroColumns[1])" instant="true"
+									onChange="@command('filtrarModulo')" hflex="1" />
+							</auxheader>
+							
+							<auxheader />
+							
+							<auxheader />
+
+							<auxheader />
+						</auxhead>
+
+						<template name="model">
+
+							<listitem onClick="@command('refrescarOperaciones', modulo = each )" >
+
+								<listcell />
+								<listcell label="@load(each.moduloid)" />
+								<listcell label="@load(each.modulo)" />
+								<listcell
+									label="@load(each.descripcion)" />
+									
+								<listcell
+									label="@load(each.path)" />
+
+								<listcell>
+
+									<if test="@load(each.habilitado)">
+										<label value="Si" />
+									</if>
+
+
+									<if test="@load(!each.habilitado)">
+										<label value="No" />
+									</if>
+
+								</listcell>
+								
+								<listcell>
+									<hlayout>
+
+										<button iconSclass="z-icon-edit"
+											onClick="@command('modalModulo', moduloid=each.moduloid)"
+											tooltiptext="Editar" disabled="@load(!vm.opEditarModulo)"/>
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarModuloConfirmacion', modulo=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opBorrarModulo)"/>
+
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lModulos.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+
+					</listbox>
+
+				</vlayout>
+
+			</groupbox>
+			
+			<groupbox vflex="1" hflex="1">
+				<caption label="Operaciones por Modulo" />
+
+				<vlayout hflex="1" vflex="1">
+
+					<hbox pack="end" hflex="1">
+
+						<button label="Agregar" iconSclass=" z-icon-plus"
+							onClick="@command('modalOperacionAgregar')" disbaled="@load(!vm.opCrearOperacion)"/>  
+
+					</hbox>
+
+					<listbox emptyMessage="lista vacía..." mold="paging"
+						vflex="1" hflex="1" model="@load(vm.lOperacionesModulos)"
+						checkmark="true">
+
+						<listhead>
+
+							<listheader hflex="min" align="center" />
+							<listheader label="Operacion" align="left" />
+							<listheader label="Descripción"	align="left" />
+							<listheader label="Abre Modulo"	align="left" />
+							<listheader align="center" hflex="min" />
+
+
+						</listhead>
+
+						<template name="model">
+
+							<listitem>
+
+								<listcell />
+								<listcell
+									label="@load(each.operacion)" />
+								<listcell
+									label="@load(each.descripcion)" />
+								<listcell>
+
+									<if test="@load(each.abreModulo)">
+										<label value="Si" />
+									</if>
+
+
+									<if test="@load(!each.abreModulo)">
+										<label value="No" />
+									</if>
+
+								</listcell>
+
+								<listcell>
+									<hlayout>
+									
+									
+										<button iconSclass="z-icon-edit"
+											onClick="@command('modalOperacion', operacionid=each.operacionid)"
+											tooltiptext="Editar" disable="@load(!vm.opEditarOperacion)"/>
+										<button
+											iconSclass="z-icon-trash-o" class="doxa-button-red"
+											onClick="@command('borrarOperacionConfirmacion', operacion=each)"
+											tooltiptext="Borrar" disabled="@load(!vm.opBorrarOperacion)"/>
+											
+									</hlayout>
+
+
+								</listcell>
+
+
+							</listitem>
+
+
+						</template>
+
+						<listfoot>
+							<listfooter span="4" align="left">
+								<hlayout>
+									<label
+										value="@load(vm.lOperacionesModulos.size())" />
+									<label value="items" />
+								</hlayout>
+							</listfooter>
+						</listfoot>
+
+					</listbox>
+
+				</vlayout>
+
+			</groupbox>
+
+		</hlayout>
+
+	</window>
+
+</zk>

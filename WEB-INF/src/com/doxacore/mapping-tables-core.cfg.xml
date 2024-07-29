@@ -1,0 +1,15 @@
+<!-- Una vez creada la tabla java se agrega aca para crear en la base de datos -->
+
+<mapping class="com.doxacore.modelo.Usuario" />
+<mapping class="com.doxacore.modelo.Rol" />
+<mapping class="com.doxacore.modelo.UsuarioRol" />
+<mapping class="com.doxacore.modelo.Modulo" />
+<mapping class="com.doxacore.modelo.Operacion" />
+<mapping class="com.doxacore.modelo.RolOperacion" />
+<mapping class="com.doxacore.modelo.Tipotipo" />
+<mapping class="com.doxacore.modelo.Tipo" />
+<mapping class="com.doxacore.modelo.Pais" />
+<mapping class="com.doxacore.modelo.Departamento" />
+<mapping class="com.doxacore.modelo.Ciudad" />
+<mapping class="com.doxacore.modelo.Auditoria" />
+<mapping class="com.doxacore.modelo.SistemaPropiedad" />

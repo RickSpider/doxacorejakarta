@@ -1,0 +1,6 @@
+<?page title="blank" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="blank" border="normal" >
+Blank ZUL
+</window>
+</zk>
