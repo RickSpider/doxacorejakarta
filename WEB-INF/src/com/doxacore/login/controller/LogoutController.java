@@ -1,5 +1,7 @@
 package com.doxacore.login.controller;
 
+import java.io.IOException;
+
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -14,8 +16,8 @@ public class LogoutController extends SelectorComposer<Component> {
 	AuthenticationService authService = new AuthenticationService3Impl();
 
 	@Listen("onClick=#logout")
-	public void doLogout() {
+	public void doLogout() throws IOException {
 		authService.logout();
-		Executions.sendRedirect("/doxacore/zul/main/");
+		Executions.sendRedirect("/");
 	}
 }

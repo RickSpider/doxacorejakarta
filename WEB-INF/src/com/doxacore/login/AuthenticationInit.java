@@ -20,7 +20,7 @@ public class AuthenticationInit implements Initiator {
 
         UsuarioCredencial cre = authService.getUserCredential();
         if(cre==null || cre.isAnonymous()){
-            Executions.sendRedirect("/doxacore/zul/login/login.zul");
+            Executions.forward("/doxacore/zul/login/login.zul");;
             return;
         }
     }

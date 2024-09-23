@@ -20,6 +20,7 @@ import org.zkoss.zul.Window;
 import com.doxacore.TemplateViewModel;
 import com.doxacore.modelo.Usuario;
 import com.doxacore.util.Register;
+import com.doxacore.util.SystemInfo;
 import com.doxacore.util.UtilStaticMetodos;
 
 public class TopBarVM {
@@ -152,8 +153,12 @@ public class TopBarVM {
 		 
 		 
 	 }
-	
-	
+	 
+	public String getMenuPopupSistema() {
+			
+		return SystemInfo.SISTEMA_PATH_DIRECTORIO+"/menuPopup.zul";
+			
+	}
 
 	public String getCurrentPass() {
 		return currentPass;

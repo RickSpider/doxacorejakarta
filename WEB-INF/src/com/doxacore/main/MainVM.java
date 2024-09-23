@@ -103,9 +103,9 @@ public class MainVM {
 		return pageMap;
 	}
 
-	public String getDirectorioSistema() {
+	public String getMenuSistema() {
 		
-		return SystemInfo.SISTEMA_PATH_DIRECTORIO;
+		return SystemInfo.SISTEMA_PATH_DIRECTORIO+"/menu.zul";
 
 	}
 

@@ -29,7 +29,8 @@ public class SystemInfo{
 		try {
 			Wini ini = new Wini(new File(SystemInfo.SISTEMA_PATH_ABSOLUTO + "/WEB-INF/sistema.ini"));
 			SISTEMA_PATH_NOMBRE = ini.get("Sistema", "Nombre");
-			SISTEMA_PATH_DIRECTORIO = "/" + ini.get("Sistema", "Directorio") + "/menu.zul";
+			SISTEMA_PATH_DIRECTORIO = "/" + ini.get("Sistema", "Directorio");
+			//SISTEMA_PATH_DIRECTORIO = "/" + ini.get("Sistema", "Directorio") + "/menu.zul";
 			SISTEMA_PAQUETE = ini.get("Sistema", "Paquete");
 			Params.CLASE_INICIO = Params.CLASE_INICIO.replace("?", SystemInfo.SISTEMA_PAQUETE);
 		} catch (InvalidFileFormatException e) {

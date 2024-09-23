@@ -3,7 +3,7 @@
 	<navbar id="navbar" orient="vertical" collapsed="@load(tbvm.collapsed)"
 		onSelect="@command('navigatePage', target=self.selectedItem.attributes['navigationPage'])">
 		
-		<apply templateURI="@load(vm.getDirectorioSistema())" />
+		<apply templateURI="@load(vm.menuSistema)" />
 
 	 	<nav label="Configuracion" iconSclass="z-icon-gear" 
 			children="@load(vm.pageMap[self.label].values()) @template('navitem')" 

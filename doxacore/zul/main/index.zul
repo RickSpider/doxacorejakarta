@@ -70,7 +70,9 @@
 
 							
 						<menupopup id="editPopup">
-
+							
+							<apply templateURI="@load(tbvm.menuPopupSistema)" />
+							
 							<menuitem iconSclass="	z-icon-key " label="Cambiar Contraseña"
 								onClick="@command('cambiarPass', user=sessionScope.userCredential.account)" />
 
