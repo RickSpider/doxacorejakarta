@@ -219,7 +219,7 @@ public class RolVM extends TemplateViewModel{
 		/*this.lOperacionesRoles = this.reg.getAllObjectsByCondicionOrder(RolOperacion.class.getName(),
 				"rolid = " + rol.getRolid(), "operacionid asc");*/
 		
-		this.lOperacionesRoles = this.reg.getAllObjectsByCondicionOrden(RolOperacion.class,campos, valores, camposOrden, orden);
+		this.lOperacionesRoles = this.reg.getAllObjectsByColumnsOrder(RolOperacion.class,campos, valores, camposOrden, orden);
 		
 		this.buscarSelectedOperacion = null;
 		this.buscarOperacion="";

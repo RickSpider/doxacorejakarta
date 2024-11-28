@@ -212,7 +212,7 @@ public class UsuarioVM extends TemplateViewModel {
 		String[] orden = {Register.ORDER_ASC};
 		
 		this.usuarioSelectedRol = usuario;
-		this.lRolesUsuarios = this.reg.getAllObjectsByCondicionOrden(UsuarioRol.class, campos, valores, camposOrden, orden);
+		this.lRolesUsuarios = this.reg.getAllObjectsByColumnsOrder(UsuarioRol.class, campos, valores, camposOrden, orden);
 		
 		this.buscarSelectedRol = null;
 		this.buscarRol="";

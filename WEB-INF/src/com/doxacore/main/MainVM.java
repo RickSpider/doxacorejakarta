@@ -64,7 +64,7 @@ public class MainVM {
 		String campos[] = {"abreModulo"};
 		Object[] valores = {true};
 				
-		List<Operacion> lOperaciones = reg.getAllObjectsByCondicion(Operacion.class, campos,valores);
+		List<Operacion> lOperaciones = reg.getAllObjectsByColumns(Operacion.class, campos,valores);
 
 		for (Operacion o : lOperaciones) {
 

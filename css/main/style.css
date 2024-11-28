@@ -20,10 +20,10 @@
     width: 580px;
 }
 .content {
-    padding: 18px 25px;
+    padding: 5px 5px;
 }
 .vertical .content {
-    padding-left: 182px;
+    padding-left: 165px;
 }
 .vertical .content.collapsed {
     padding-left: 50px;

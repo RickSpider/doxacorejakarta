@@ -25,7 +25,7 @@ public class UserInfoService2Impl implements UserInfoService,Serializable{
 		String[] campos =  {"activo"};
 		Object[] valores = {true};
 		
-		userList = r.getAllObjectsByCondicion(Usuario.class, campos, valores);
+		userList = r.getAllObjectsByColumns(Usuario.class, campos, valores);
 		
 		if (userList.size() == 0 ) {
 			

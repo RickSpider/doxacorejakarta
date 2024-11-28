@@ -29,7 +29,7 @@ public class UtilMetodos {
 		try {
 			
 			Class c = Class.forName(clase);
-			Object o = c.newInstance();
+			Object o = c.getDeclaredConstructor().newInstance();
 			
 			Method method = c.getDeclaredMethod(metodo);
 			method.invoke(o);

@@ -214,7 +214,7 @@ public class TipotipoVM extends TemplateViewModel{
 			String[] orden = {Register.ORDER_ASC};
 			
 			this.tipotipoSelectedTipo = tipotipo;
-			this.lTiposTipotipos = this.reg.getAllObjectsByCondicionOrden(Tipo.class, campos, valores, camposOrden, orden);
+			this.lTiposTipotipos = this.reg.getAllObjectsByColumnsOrder(Tipo.class, campos, valores, camposOrden, orden);
 
 		}
 		

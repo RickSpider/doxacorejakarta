@@ -1,2 +1,13 @@
 
-<menuitem iconSclass="	z-icon-key " label="TEST desde Apply" />
+<zk>
+
+	<!-- 
+	<menuitem iconSclass="	z-icon-key " label="TEST desde Apply" />  Poner directo esto para crear los submenus
+	
+	<menuseparator /> es un serparador
+	-->
+	
+	<menuitem iconSclass="	z-icon-key " label="TEST desde Apply2" />
+
+</zk>
+

@@ -214,7 +214,7 @@ public class ModuloVM extends TemplateViewModel {
 		String[] orden = {Register.ORDER_ASC};
 
 		this.moduloSelectedOperacion = modulo;
-		this.lOperacionesModulos = this.reg.getAllObjectsByCondicionOrden(Operacion.class,campos, valores, camposOrden, orden);
+		this.lOperacionesModulos = this.reg.getAllObjectsByColumnsOrder(Operacion.class,campos, valores, camposOrden, orden);
 
 	}
 	

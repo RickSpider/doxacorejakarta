@@ -88,7 +88,7 @@ public abstract class TemplateViewModel {
 		String []camposOrden = {"rolid"};
 		String[] orden = {Register.ORDER_ASC};
 		
-		List<UsuarioRol> lur = this.reg.getAllObjectsByCondicionOrden(UsuarioRol.class, campos, valores, camposOrden, orden);
+		List<UsuarioRol> lur = this.reg.getAllObjectsByColumnsOrder(UsuarioRol.class, campos, valores, camposOrden, orden);
 		
 		List<Rol> lr = new ArrayList<Rol>();
 		

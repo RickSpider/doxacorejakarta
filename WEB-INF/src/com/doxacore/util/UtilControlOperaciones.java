@@ -17,7 +17,7 @@ public class UtilControlOperaciones {
 		String [] campos = {"modulo"};
 		Object [] valores = {modulo};
 		
-		List<Operacion> lOperacionesModulo = reg.getAllObjectsByCondicion(Operacion.class,
+		List<Operacion> lOperacionesModulo = reg.getAllObjectsByColumns(Operacion.class,
 				campos, valores);
 
 		return lOperacionesModulo;

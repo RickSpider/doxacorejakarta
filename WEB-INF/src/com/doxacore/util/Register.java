@@ -11,6 +11,8 @@ import org.zkoss.zul.South;
 import com.doxacore.modelo.Modelo;
 import com.doxacore.modelo.Usuario;
 
+import jakarta.persistence.NoResultException;
+
 
 public class Register {
 	
@@ -55,11 +57,50 @@ public class Register {
 		 return m;
 	}
 	
-	public synchronized <T extends Modelo> T getObjectById(String entityName, long id) {
+	public synchronized <T extends Modelo> List<T> saveObject(List<T> lm, String Usuario) {
+		
 		
 		 Session sess =  currentSession();
 		 
-		 return (T) sess.get(entityName, id);
+		 for (T m : lm) {
+			 
+			 if (m.getCreadoUser()== null || m.getCreadoUser().length() == 0) {
+				 
+				 m.setCreadoUser(Usuario);
+				 
+			 } else {
+				 
+				 m.setModificacion(new Date());
+
+			 }
+			 
+			 m.setModificacionUser(Usuario);
+			 
+			 m = (T) sess.merge(m);
+			 
+			 sess.flush();
+			 sess.clear();
+			 
+		 }
+
+		// sess.saveOrUpdate(m);
+		
+		 //sess.getTransaction().commit();
+		 
+		 //sess.flush();
+		 
+		// sess.clear();
+		 
+		 return lm;
+	}	
+	
+	public synchronized <T extends Modelo> T getObjectById(String entityName, long id) {
+		
+		 Session sess =  currentSession();
+		 sess.setDefaultReadOnly(true);
+		 T entity = (T) sess.get(entityName, id);
+		 sess.evict(entity);
+		 return entity ;
 		
 	}
 	
@@ -126,7 +167,20 @@ public class Register {
 		
 		//System.out.println(query.getQueryString());
 		
-		return (T) query.getSingleResult();
+		//T entity = (T) query.getSingleResult();
+		//sess.evict(entity);
+		
+		T entity = null;
+	    try {
+	        entity = (T) query.getSingleResult();
+	        sess.evict(entity);
+	    } catch (NoResultException e) {
+	        // Manejar el caso donde no se encuentran resultados, devolviendo null o un valor por defecto
+	        System.out.println("No result found for query");
+	        return null;
+	    }
+	    
+		return entity;
 		
 	}
 	
@@ -147,12 +201,34 @@ public class Register {
 		return this.getObjectByColumns(clase ,campos , valores);
 	}
 	
-	/*public synchronized <T extends Modelo> T getObjectByCondicion(String entityName, String condicion) {
+	public synchronized <T extends Modelo> T getObjectByCondicion(Class clase, String condicion) {
 		
 		Session sess =  currentSession();
 		
-		return (T) sess.createQuery("from " + entityName + " where " + condicion ).uniqueResult();
-	}*/
+		Query<List<T>> query = sess.createQuery("from " + clase.getName() + " where " + condicion, clase );
+		
+		T entity = null;
+	    try {
+	        entity = (T) query.getSingleResult();
+	        sess.evict(entity);
+	    } catch (NoResultException e) {
+	        // Manejar el caso donde no se encuentran resultados, devolviendo null o un valor por defecto
+	        System.out.println("No result found for query");
+	        return null;
+	    }
+	    
+		return entity;
+		
+		//return (T) sess.createQuery("from " + entityName + " where " + condicion ).getSingleResult();
+	}
+	
+	public synchronized <T extends Modelo> List<T> getAllObjectsByCondicion(Class clase, String condicion) {
+		
+		Session sess =  currentSession();
+		
+		return  sess.createQuery("from " + clase.getName() + " where " + condicion, clase ).getResultList();
+	
+	}
 	
 	/*public synchronized <T extends Modelo> T getObjectByColumn(Class clase, String column, Object value) {
 		
@@ -174,28 +250,28 @@ public class Register {
 		return query.uniqueResult();
 	}*/
 	
-	public synchronized <T extends Modelo> List<T> getAllObjects(String entityName) {
+	public synchronized <T extends Modelo> List<T> getAllObjects(Class clase) {
 		
 		Session sess =  currentSession();
 
-		return sess.createQuery("from " + entityName ).list();
+		return sess.createQuery("from " + clase.getName(), clase ).list();
 			
 	}
 	
-	public synchronized <T extends Modelo> List<T> getAllObjectsByCondicion(Class clase, String[] campos, Object[] valores){
+	public synchronized <T extends Modelo> List<T> getAllObjectsByColumns(Class clase, String[] campos, Object[] valores){
 		
-		return getAllObjectsByCondicionOrden(clase, campos, valores, null, null);
+		return getAllObjectsByColumnsOrder(clase, campos, valores, null, null);
 		
 	}
 	
 	public synchronized <T extends Modelo> List<T> getAllObjectsByOrden(Class clase, String[] camposOrden, String[] orden){
 		
-		return getAllObjectsByCondicionOrden(clase, null, null, camposOrden, orden);
+		return getAllObjectsByColumnsOrder(clase, null, null, camposOrden, orden);
 		
 	}
 	
 	
-	public synchronized <T extends Modelo> List<T> getAllObjectsByCondicionOrden(Class clase, String[] campos, Object[] valores, String[] camposOrden, String[] orden) {
+	public synchronized <T extends Modelo> List<T> getAllObjectsByColumnsOrder(Class clase, String[] campos, Object[] valores, String[] camposOrden, String[] orden) {
 		
 		Session sess =  currentSession();
 		
@@ -275,8 +351,9 @@ public class Register {
 		}
 		
 		//System.out.println(query.getQueryString());
-		
-		return (List<T>) query.getResultList();
+		List<T> results = (List<T>) query.getResultList();
+		sess.clear();
+		return results;
 			
 	}
 	
@@ -286,6 +363,11 @@ public class Register {
 		
 		//sess.delete(m);
 		sess.remove(m);
+		
+		sess.flush();
+		 
+		sess.clear();
+		
 	}
 	
 	public synchronized List<Object[]> sqlNativo(String sql){
