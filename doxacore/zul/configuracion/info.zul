@@ -1,8 +1,8 @@
 <?page title="Roles" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Info" border="normal"
+	<window border="normal" vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
 		
-		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+		<caption label="Info" style="font-weight:bold"/>
 
 		<hlayout vflex="1" >
 			

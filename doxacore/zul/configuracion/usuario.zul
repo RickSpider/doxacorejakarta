@@ -1,8 +1,10 @@
 <?page title="Usuarios" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Usuario" border="normal"
+	<window border="normal"
 		viewModel="@id('vm') @init('com.doxacore.configuracion.UsuarioVM')"
 		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+		
+		<caption label="Usuario" style="font-weight:bold"/>
 
 		<hlayout vflex="1" hflex="1">
 			<groupbox hflex="1" vflex="1">
