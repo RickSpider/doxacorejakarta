@@ -1,7 +1,8 @@
-<bandbox value="${finderValue}" disabled="${disabled}"
+<bandbox value="${finderValue}" disabled="${disabled}" visible="${empty finderVisible ? true : finderVisible}"
 	mold="rounded" autodrop="true"
 	onOpen="@command('generarFinders', finder= finderModel.nameFinder)"
-	width="150px" readonly="true">
+	width="150px" readonly="true"
+	buttonVisible="${empty buttonVisible ? true : buttonVisible}">
 	<bandpopup>
 
 		<vbox>

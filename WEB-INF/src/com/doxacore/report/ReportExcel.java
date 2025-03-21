@@ -39,10 +39,8 @@ public class ReportExcel {
 
 	}
 
-	private void agregarLogoTitulo(String titulo, String pathImg) {
+	private void agregarLogoTitulo(String titulo, byte[] logo) {
 
-		
-		
 		CellStyle cellStyle = workbook.createCellStyle();
 		cellStyle.setAlignment(HorizontalAlignment.CENTER);
 		cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -52,56 +50,44 @@ public class ReportExcel {
 		Cell cell = headerRow.createCell(0);
 		cell.setCellValue(titulo);
 		cell.setCellStyle(cellStyle);
-		
-		sheet.addMergedRegion(new CellRangeAddress(0,3,0,5));
 
-		byte[] bytes = null;
-		try {
+		sheet.addMergedRegion(new CellRangeAddress(0, 3, 0, 5));
 
-			FileInputStream logo = new FileInputStream(pathImg);
-			bytes = IOUtils.toByteArray(logo);
-			logo.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (bytes == null) {
+		if (logo == null) {
 
 			return;
 
 		}
 
-		int logoID = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+		int logoID = workbook.addPicture(logo, Workbook.PICTURE_TYPE_PNG);
 
 		XSSFDrawing drawing = (XSSFDrawing) sheet.createDrawingPatriarch();
 
 		XSSFClientAnchor logoSize = new XSSFClientAnchor();
 
 		logoSize.setCol1(0);
-	//	logoSize.setCol2(1);
+		// logoSize.setCol2(1);
 		logoSize.setRow1(0);
-	//	logoSize.setRow2(2);
+		// logoSize.setRow2(2);
 
-		 Picture pict = drawing.createPicture(logoSize, logoID);
-		 pict.resize();
-		 
-		 int pictOriginalWidthInPixels = pict.getImageDimension().width;
-		  int pictOriginalHeightInPixels = pict.getImageDimension().height;
-		  
-		  float rowHeightInPixels = 0f;
-		  for (int r = 0; r < 4; r++) {
-			  headerRow = sheet.getRow(r); if (headerRow == null) headerRow = sheet.createRow(r);
-		   float rowHeightInPoints = headerRow.getHeightInPoints(); 
-		   rowHeightInPixels += rowHeightInPoints * Units.PIXEL_DPI / Units.POINT_DPI;
-		  }
-		  
-		  float scale = rowHeightInPixels / pictOriginalHeightInPixels;
-		  pict.resize(scale, scale); //now picture is resized to fit into the first 4 rows
-		
+		Picture pict = drawing.createPicture(logoSize, logoID);
+		pict.resize();
+
+		int pictOriginalWidthInPixels = pict.getImageDimension().width;
+		int pictOriginalHeightInPixels = pict.getImageDimension().height;
+
+		float rowHeightInPixels = 0f;
+		for (int r = 0; r < 4; r++) {
+			headerRow = sheet.getRow(r);
+			if (headerRow == null)
+				headerRow = sheet.createRow(r);
+			float rowHeightInPoints = headerRow.getHeightInPoints();
+			rowHeightInPixels += rowHeightInPoints * Units.PIXEL_DPI / Units.POINT_DPI;
+		}
+
+		float scale = rowHeightInPixels / pictOriginalHeightInPixels;
+		pict.resize(scale, scale); // now picture is resized to fit into the first 4 rows
+
 	}
 
 	private void agregarTitulos(List<String[]> titulos) {
@@ -201,7 +187,7 @@ public class ReportExcel {
 	}
 
 	public void descargar(List<String[]> titulos, List<String[]> headersDatos, List<Object[]> datos, String titulo,
-			String logo) {
+			byte[] logo) {
 
 		if (logo != null) {
 
