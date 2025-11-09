@@ -36,6 +36,16 @@
 			
 			</hlayout>
 			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="Color: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.tipoSelected.color)"
+					width="150px" />
+			
+			</hlayout>
+			
 	
 			<space height="10px" />
 

@@ -23,7 +23,7 @@
 					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
 						vflex="1" model="@load(vm.lModulos)" checkmark="true">
 
-						<listhead>
+						<listhead id="lh">
 
 							<listheader hflex="min" align="center" />
 							<listheader label="ID" align="right"
@@ -110,7 +110,7 @@
 						</template>
 
 						<listfoot>
-							<listfooter span="4" align="left">
+							<listfooter span="${lh.getChildren().size()}" align="left">
 								<hlayout>
 									<label
 										value="@load(vm.lModulos.size())" />

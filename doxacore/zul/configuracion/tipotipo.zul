@@ -23,7 +23,7 @@
 					<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
 						vflex="1" model="@load(vm.lTipotipos)" checkmark="true">
 
-						<listhead>
+						<listhead id="lh">
 
 							<listheader hflex="min" align="center" />
 							<listheader label="ID" align="right" hflex="min" />
@@ -98,7 +98,7 @@
 						</template>
 
 						<listfoot>
-							<listfooter span="4" align="left">
+							<listfooter span="6" align="left">
 								<hlayout>
 									<label
 										value="@load(vm.lTipotipos.size())" />
@@ -176,7 +176,7 @@
 						</template>
 
 						<listfoot>
-							<listfooter span="4" align="left">
+							<listfooter span="5" align="left">
 								<hlayout>
 									<label
 										value="@load(vm.lTiposTipotipos.size())" />
