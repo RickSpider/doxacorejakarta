@@ -3,8 +3,6 @@ package com.doxacore.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
-import org.zkoss.zul.South;
-
 import com.doxacore.modelo.Modulo;
 import com.doxacore.modelo.Operacion;
 import com.doxacore.modelo.Rol;
@@ -35,7 +33,7 @@ public class UtilStaticMetodos {
 		System.out.println("Creando Usuario Admin");
 		Usuario us = new Usuario();
 		us.setAccount("admin");
-		us.setPassword(getSHA256("123"));
+		us.setPassword(getSHA256("adm123!"));
 		us.setFullName("Administrador");
 		us.setActivo(true);
 		us.setEmail("ricardo.gonzalez@doxa.com.py");
@@ -50,6 +48,18 @@ public class UtilStaticMetodos {
 		rolMaster.setDescripcion("Master");
 		rolMaster = reg.saveObject(rolMaster, "System");
 		System.out.println("Se creo el Rol Master con el id "+rolMaster.getRol());
+		
+		Rol rolAdmin = new Rol();
+		rolAdmin.setRol("Admin");
+		rolAdmin.setDescripcion("Admin");
+		rolAdmin = reg.saveObject(rolAdmin, "System");
+		System.out.println("Se creo el Rol Admin con el id "+rolAdmin.getRol());
+		
+		Rol rolOperador= new Rol();
+		rolOperador.setRol("Operador");
+		rolOperador.setDescripcion("Operador");
+		rolOperador = reg.saveObject(rolOperador, "System");
+		System.out.println("Se creo el Rol Operador con el id "+rolOperador.getRol());
 		
 		System.out.println("Asociando Usuario con Rol");
 		UsuarioRol ur = new UsuarioRol();
@@ -428,6 +438,34 @@ public class UtilStaticMetodos {
 				ro17x1.setRol(rolMaster);
 				ro17x1.setOperacion(op17x1);
 				reg.saveObject(ro17x1, "System");
+				
+				//--editar
+				
+				Operacion op17x2 = new Operacion();
+				op17x2.setOperacion("EditarSistemaPropiedad");
+				op17x2.setDescripcion("Editar SistemaPropiedad");
+				op17x2.setAbreModulo(false);
+				op17x2.setModulo(sp);
+				op17x2 = reg.saveObject(op17x2, "System");
+				
+				RolOperacion ro17x2 = new RolOperacion();
+				ro17x2.setRol(rolMaster);
+				ro17x2.setOperacion(op17x2);
+				reg.saveObject(ro17x2, "System");
+				
+				//--Borrar
+				
+				Operacion op17x3= new Operacion();
+				op17x3.setOperacion("BorrarSistemaPropiedad");
+				op17x3.setDescripcion("Borrar SistemaPropiedad");
+				op17x3.setAbreModulo(false);
+				op17x3.setModulo(sp);
+				op17x3 = reg.saveObject(op17x3, "System");
+				
+				RolOperacion ro17x3 = new RolOperacion();
+				ro17x3.setRol(rolMaster);
+				ro17x3.setOperacion(op17x3);
+				reg.saveObject(ro17x3, "System");
 		
 		//Modulo Info
 		System.out.println("Creando Modulo Info");

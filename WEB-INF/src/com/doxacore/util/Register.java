@@ -48,10 +48,9 @@ public class Register {
 		 m.setModificacionUser(Usuario);
 		
 		 //sess.saveOrUpdate(m);
-		 m = (T) sess.merge(m);
-		 
+		 m = (T) sess.merge(m); 
 		 sess.flush();
-		 
+		
 		 sess.clear();
 		 
 		 return m;
@@ -97,9 +96,9 @@ public class Register {
 	public synchronized <T extends Modelo> T getObjectById(String entityName, long id) {
 		
 		 Session sess =  currentSession();
-		 sess.setDefaultReadOnly(true);
+		// sess.setDefaultReadOnly(true);
 		 T entity = (T) sess.get(entityName, id);
-		 sess.evict(entity);
+		// sess.evict(entity);
 		 return entity ;
 		
 	}
@@ -146,14 +145,14 @@ public class Register {
 		if (campos != null && campos.length > 0) {
 			for (int i = 0; i<campos.length ; i++) {
 				
-				System.out.println(campos[i]);
+				//System.out.println(campos[i]);
 				
 				if (!campos[i].contains(".")) {
 					
 					query.setParameter(campos[i], valores[i]);
 					
 				}else {
-					System.out.println("contiene");
+					//System.out.println("contiene");
 					String[] partes = campos[i].split("\\.");
 					String despuesDelPunto = partes.length > 1 ? partes[1] : null;
 					query.setParameter(despuesDelPunto, valores[i]);
@@ -331,14 +330,14 @@ public class Register {
 		if (campos != null && campos.length > 0) {
 			for (int i = 0; i<campos.length ; i++) {
 				
-				System.out.println(campos[i]);
+			//	System.out.println(campos[i]);
 				
 				if (!campos[i].contains(".")) {
 					
 					query.setParameter(campos[i], valores[i]);
 					
 				}else {
-					System.out.println("contiene");
+				//	System.out.println("contiene");
 					String[] partes = campos[i].split("\\.");
 					String despuesDelPunto = partes.length > 1 ? partes[1] : null;
 					query.setParameter(despuesDelPunto, valores[i]);

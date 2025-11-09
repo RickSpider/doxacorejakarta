@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -125,6 +128,37 @@ public class UtilMetodos {
 		
 		return cal.getTime();
 		
+	}
+	
+	public String getSHA512(String input) {
+	    String toReturn = null;
+	    try {
+	        MessageDigest digest = MessageDigest.getInstance("SHA-512");
+	        digest.reset();
+	        digest.update(input.getBytes("UTF-8"));
+	        // SHA-512 produce 64 bytes -> 128 caracteres hexadecimales
+	        toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return toReturn;
+	}
+	
+	public String RandomStringGenerator() {
+
+	    String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+	    SecureRandom random = new SecureRandom();
+	    int length = 35;
+
+	    
+	    StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            sb.append(CHARACTERS.charAt(index));
+        }
+	   
+        return sb.toString();
+	   
 	}
 
 }

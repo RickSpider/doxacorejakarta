@@ -22,9 +22,7 @@ public class Control {
 	
 	protected SistemaPropiedad getSistemaPropiedad(String clave) {
 		
-		SistemaPropiedad sp = this.reg.getObjectByColumn(SistemaPropiedad.class, "clave", clave);
-		
-		return sp;
+		return this.reg.getObjectByColumn(SistemaPropiedad.class, "clave", clave);
 		
 	}
 

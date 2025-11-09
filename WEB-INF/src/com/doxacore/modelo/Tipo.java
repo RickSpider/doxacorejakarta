@@ -28,6 +28,8 @@ public class Tipo extends Modelo implements Serializable{
 	private String tipo;
 	
 	private String descripcion;
+	
+	private String color;
 
 	@Column(unique = true)
 	private String sigla;
@@ -76,6 +78,14 @@ public class Tipo extends Modelo implements Serializable{
 		this.tipotipo = tipotipo;
 	}
 	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	@Override
 	public String getStringDatos() {
 		// TODO Auto-generated method stub
@@ -86,10 +96,6 @@ public class Tipo extends Modelo implements Serializable{
 	public Object[] getArrayObjectDatos() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 }

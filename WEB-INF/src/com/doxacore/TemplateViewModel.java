@@ -2,14 +2,12 @@ package com.doxacore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.zkoss.bind.annotation.AfterCompose;
-import org.zkoss.bind.annotation.BindingParam;
-import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.ExecutionParam;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Component;
@@ -82,7 +80,7 @@ public abstract class TemplateViewModel {
 
 	}
 	
-	protected List<Rol> getRolesCurrentUser(){
+	/*protected List<Rol> getRolesCurrentUser(){
 		
 		String campos[] = {"usuario"};
 		Object[] valores = {this.getCurrentUser()};
@@ -101,26 +99,33 @@ public abstract class TemplateViewModel {
 		
 		return lr;
 		
+	}*/
+	
+	protected List<Rol> getRolesCurrentUser() {
+	    // Verifica que `getAllObjectsByColumnsOrder` devuelva una lista de UsuarioRol
+	    return  this.reg.getAllObjectsByColumnsOrder(
+	            UsuarioRol.class,
+	            new String[]{"usuario"},
+	            new Object[]{this.getCurrentUser()},
+	            new String[]{"rolid"},
+	            new String[]{Register.ORDER_ASC}
+	        )
+	        .stream()
+	        .map(usr -> ((UsuarioRol) usr).getRol())  
+	        .toList();
 	}
+
 	
 	protected boolean isUserRolMaster() {
-		
-		Rol rol = this.reg.getObjectByColumn(Rol.class, "rol", Params.ROL_MASTER);
-		
-		String[] campos = {"usuariorolpk.usuario", "usuariorolpk.rol"};
-		Object[] valores = {this.getCurrentUser(), rol};
-		
-		//UsuarioRol ur = this.reg.getObjectByCondicion(UsuarioRol.class.getName(), "usuarioid = "+this.getCurrentUser().getUsuarioid()+" AND rolid = "+rol.getRolid());
-		
-		UsuarioRol ur = this.reg.getObjectByColumns(UsuarioRol.class, campos, valores);
-		
-		if (ur == null) {
-			
-			return false;
-		}
-		
-		return true;
-		
+	    Rol rol = Objects.requireNonNull(this.reg.getObjectByColumn(Rol.class, "rol", Params.ROL_MASTER));
+
+	    UsuarioRol ur = this.reg.getObjectByColumns(
+	        UsuarioRol.class,
+	        new String[]{"usuariorolpk.usuario", "usuariorolpk.rol"},
+	        new Object[]{this.getCurrentUser(), rol}
+	    );
+
+	    return ur != null;
 	}
 
 	protected <T extends Modelo> T save(T m) {
@@ -253,10 +258,8 @@ public abstract class TemplateViewModel {
 	}
 	
 	protected SistemaPropiedad getSistemaPropiedad(String clave) {
-		
-		SistemaPropiedad sp = this.reg.getObjectByColumn(SistemaPropiedad.class, "clave", clave);
-		
-		return sp;
+
+		return this.reg.getObjectByColumn(SistemaPropiedad.class, "clave", clave);
 		
 	}
 	
