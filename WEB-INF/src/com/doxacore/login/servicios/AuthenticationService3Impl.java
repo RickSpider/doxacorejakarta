@@ -40,7 +40,10 @@ public class AuthenticationService3Impl extends AuthenticationService2Impl{
 	@Override
 	public void logout() {
 		Session sess = Sessions.getCurrent();
-		sess.removeAttribute("userCredential");
+		//sess.removeAttribute("userCredential");
+		if (sess != null) {
+			sess.invalidate();
+		}
 	}
 
 }

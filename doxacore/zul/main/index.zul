@@ -6,8 +6,9 @@
 <?style src="/css/main/doxacore.css" ?>
 <?style src="/css/main/style.css" ?>
 <?style src="/css/main/widget.css" ?>
-<?style src="/css/bootstrap/bootstrap4.min.css" ?>
-<?style src="/css/fontawesome/font-awesome.min.css" ?>
+
+<?link href="/css/fontawesome/font-awesome-7.2.0/all.min.css" rel="stylesheet"?>
+
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 
@@ -27,7 +28,7 @@
 
 					<button iconSclass="z-icon-reorder" class="doxa-button-round" onClick="@command('collapsedAll')"/>
 
-					<label value="PowerBy DoxaCORE" visible="@load(tbvm.visibleResponsive)"/>
+					<label value="@load(empty sessionScope.userCredential.extra2 ? 'PowerBy DoxaCORE' : sessionScope.userCredential.extra2)" visible="@load(tbvm.visibleResponsive)"/>
 
 				</hbox>
 

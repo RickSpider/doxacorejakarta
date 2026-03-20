@@ -1,8 +1,13 @@
 <?page title="DoxaCORE"?>
 
-<?link href="/css/bootstrap/bootstrap4.min.css" rel="stylesheet" id="bootstrap-css" ?>
-<?script src="/css/bootstrap/bootstrap4.min.js" ?>
+<!--  <?link href="/css/bootstrap/bootstrap4.min.css" rel="stylesheet" id="bootstrap-css" ?>
+<?script src="/css/bootstrap/bootstrap4.min.js" ?> --> 
 
+ 
+<?link href="/css/bootstrap/bootstrap5.3.8.min.css" rel="stylesheet" id="bootstrap-css" ?>
+<?script src="/css/bootstrap/bootstrap5.3.8.bundle.min.js" crossorigin="anonymous"?>
+
+ 
 
 <?link rel="stylesheet" href="/css/login/login.css" ?>
 
@@ -34,12 +39,13 @@
 						<textbox id="account" type="text"
 							class="form-control" placeholder="Usuario" />
 					</div>
+				
 					<div class="form-group">
 						<label>Contraseña</label>
 						<textbox id="password" type="password"
 							class="form-control" placeholder="Contraseña" />
 					</div>
-
+					
 					<button id="login" label="Iniciar"
 						class="btn btn-black" />
 

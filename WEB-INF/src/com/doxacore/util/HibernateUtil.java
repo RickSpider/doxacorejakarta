@@ -1,42 +1,61 @@
 package com.doxacore.util;
 
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
 
-	private static SessionFactory sessionFactory;
-	static {
-		try {
+    private static final SessionFactory sessionFactory;
 
-			System.out.println("==========DENTRO DEL HIBERNATE=========");
-			System.out.println("Datasource:" + getDataSource()+"\n");
+    static {
+        try {
+            System.out.println("==========INICIALIZANDO HIBERNATE==========");
+            System.out.println("Datasource: " + getDataSource());
 
-			InputStream ds = new FileInputStream(getDataSource());
+            // Cargar propiedades externas
+            Properties props = new Properties();
+            try (InputStream in = new FileInputStream(getDataSource())) {
+                props.load(in);
+            }
 
-			Properties p = new Properties();
-			p.load(ds);
+            // Construir registry de Hibernate
+            StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                    .configure()      // carga hibernate.cfg.xml
+                    .applySettings(props) // sobrescribe propiedades si es necesario
+                    .build();
 
-			sessionFactory = new Configuration().setProperties(p).configure().buildSessionFactory();
+            // Crear SessionFactory a partir de MetadataSources
+            sessionFactory = new MetadataSources(registry)
+                    .buildMetadata()
+                    .buildSessionFactory();
 
-		} catch (Throwable ex) {
-			throw new ExceptionInInitializerError(ex);
+            System.out.println("SessionFactory creada correctamente.");
+            
+          /*  ConnectionProvider cp = sessionFactory.getSessionFactoryOptions()
+            	    .getServiceRegistry()
+            	    .getService(ConnectionProvider.class);*/
 
-		}
-	}
+            	//System.out.println("Clase del ConnectionProvider: " + cp.getClass().getName());
 
-	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
+        } catch (Throwable ex) {
+            System.err.println("Error al inicializar Hibernate: " + ex.getMessage());
+            ex.printStackTrace();
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
-	private static String getDataSource() {
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
-		return SystemInfo.SISTEMA_PATH_ABSOLUTO + "/WEB-INF/datasource.properties";
-
-	}
-
+    private static String getDataSource() {
+        return SystemInfo.SISTEMA_PATH_ABSOLUTO + "/WEB-INF/datasource.properties";
+    }
 }

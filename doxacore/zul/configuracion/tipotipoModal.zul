@@ -34,8 +34,7 @@
 				<textbox value="@bind(vm.tipotipoSelected.descripcion)"
 					width="150px" />
 			
-			</hlayout>			
-			
+			</hlayout>
 
 			<space height="10px" />
 

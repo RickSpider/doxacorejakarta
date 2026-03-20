@@ -30,6 +30,8 @@ public class Tipo extends Modelo implements Serializable{
 	private String descripcion;
 	
 	private String color;
+	
+	private Long codeExtra;
 
 	@Column(unique = true)
 	private String sigla;
@@ -84,6 +86,14 @@ public class Tipo extends Modelo implements Serializable{
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public Long getCodeExtra() {
+		return codeExtra;
+	}
+
+	public void setCodeExtra(Long codeExtra) {
+		this.codeExtra = codeExtra;
 	}
 
 	@Override

@@ -20,8 +20,6 @@ import com.doxacore.TemplateViewModel;
 import com.doxacore.modelo.Operacion;
 import com.doxacore.modelo.Rol;
 import com.doxacore.modelo.RolOperacion;
-import com.doxacore.modelo.Usuario;
-import com.doxacore.modelo.UsuarioRol;
 import com.doxacore.util.Params;
 import com.doxacore.util.Register;
 

@@ -46,6 +46,17 @@
 			
 			</hlayout>
 			
+			
+			<hlayout>
+			
+				<hbox width="130px">
+					<label value="CodeExtra: " style="font-weight:bold" />
+				</hbox>
+				<textbox value="@bind(vm.tipoSelected.codeExtra)"
+					width="150px" />
+			
+			</hlayout>	
+			
 	
 			<space height="10px" />
 
